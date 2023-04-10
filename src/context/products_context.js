@@ -22,7 +22,6 @@ const initialState = {
   single_product_loading: false,
   single_product_error: false,
   single_product: {},
-
 }
 
 const ProductsContext = React.createContext()
@@ -50,7 +49,6 @@ export const ProductsProvider = ({ children }) => {
   }
 
   const fetchSingleProduct = async (url) => {
-    // console.log(url)
     dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
     try {
       const response = await axios.get(url)
