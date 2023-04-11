@@ -13,7 +13,56 @@ const Filters = () => {
     clearFilters, 
     all_products
   } = useFilterContext()
-  return <Wrapper>filters</Wrapper>
+
+  const categories = getUniqueValues(all_products, 'category')
+  const companies = getUniqueValues(all_products, 'company')
+  const colors = getUniqueValues(all_products, 'colors')
+
+
+  return <Wrapper>
+    <div className="content">
+      <form onSubmit={(e) => e.preventDefault()}>
+        {/* search input */}
+        <div className="form-control">
+          <input type="text" name='text' placeholder='search' className="search-input" value={text} onChange={updateFilters} />
+        </div>
+        {/* end search input */}
+        
+        {/* categories */}
+        <div className="form-control">
+          <h5>category</h5>
+          <div>
+            {categories.map((c, index) => {
+              return <button key={index}
+                onClick={updateFilters}
+                name='category'
+                type='button'
+                className={`${category == c.toLowerCase() ? 'active' : null}`}>
+                {c}
+              </button>
+            } )}
+          </div>
+        </div>
+
+        {/* end of categories */}
+
+        {/* companies */}
+        <div className="form-control">
+          <h5>Company</h5>
+          <select name="company" value={company} onChange={updateFilters} className='company'>
+            {companies.map((c, index) => {
+              return (
+                <option value="c" key={index}>{c}</option>
+              )
+            })}
+          </select>
+        </div>
+
+        {/* end of companies */}
+
+      </form>
+    </div>
+  </Wrapper>
 }
 
 const Wrapper = styled.section`
